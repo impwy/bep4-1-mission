@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.back.initData.DataInit;
-import com.back.repository.MemberRepository;
-import com.back.repository.PostRepository;
+import com.back.boundedContext.member.entity.Member;
+import com.back.global.initData.DataInit;
+import com.back.boundedContext.member.repository.MemberRepository;
+import com.back.boundedContext.post.repository.PostRepository;
 
 @SpringBootTest(properties = {
         "spring.datasource.url=jdbc:h2:mem:init_test;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
@@ -35,7 +36,7 @@ class BackApplicationTests {
     void initializationFillsMissingMembers() {
         postRepository.deleteAll();
         memberRepository.deleteAll();
-        memberRepository.saveAndFlush(new com.back.entity.Member("user2", "existing-password", "existing"));
+        memberRepository.saveAndFlush(new Member("user2", "existing-password", "existing"));
 
         dataInit.makeBaseMembers();
         dataInit.makeBasePosts();

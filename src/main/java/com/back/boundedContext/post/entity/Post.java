@@ -1,4 +1,4 @@
-package com.back.entity;
+package com.back.boundedContext.post.entity;
 
 import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.CascadeType.REMOVE;
@@ -7,7 +7,8 @@ import static jakarta.persistence.FetchType.LAZY;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.back.jpa.entity.BaseIdAndTime;
+import com.back.boundedContext.member.entity.Member;
+import com.back.global.jpa.entity.BaseIdAndTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

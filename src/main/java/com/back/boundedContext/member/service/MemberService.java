@@ -1,12 +1,12 @@
-package com.back.service;
+package com.back.boundedContext.member.service;
 
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.back.entity.Member;
-import com.back.exception.DomainException;
-import com.back.repository.MemberRepository;
+import com.back.boundedContext.member.entity.Member;
+import com.back.global.exception.DomainException;
+import com.back.boundedContext.member.repository.MemberRepository;
 
 @Service
 public class MemberService {
