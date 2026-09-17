@@ -6,9 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.back.boundedContext.member.app.MemberFacade;
 import com.back.boundedContext.member.domain.Member;
 import com.back.boundedContext.post.domain.Post;
-import com.back.boundedContext.member.app.MemberService;
 import com.back.boundedContext.post.app.PostService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,16 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DataInit {
     private final DataInit self;
-    private final MemberService memberService;
+    private final MemberFacade memberFacade;
     private final PostService postService;
 
     public DataInit(
             @Lazy DataInit self,
-            MemberService memberService,
+            MemberFacade memberFacade,
             PostService postService
     ) {
         this.self = self;
-        this.memberService = memberService;
+        this.memberFacade = memberFacade;
         this.postService = postService;
     }
 
@@ -43,8 +43,8 @@ public class DataInit {
     public void makeBaseMembers() {
         for (int i = 1; i <= 3; i++) {
             String username = "user" + i;
-            if (memberService.findByUsername(username).isEmpty()) {
-                memberService.join(username, "1234", "유저" + i);
+            if (memberFacade.findByUsername(username).isEmpty()) {
+                memberFacade.join(username, "1234", "유저" + i);
             }
         }
     }
@@ -53,9 +53,9 @@ public class DataInit {
     public void makeBasePosts() {
         if (postService.count() > 0) {return;}
 
-        Member user1Member = memberService.findByUsername("user1").get();
-        Member user2Member = memberService.findByUsername("user2").get();
-        Member user3Member = memberService.findByUsername("user3").get();
+        Member user1Member = memberFacade.findByUsername("user1").get();
+        Member user2Member = memberFacade.findByUsername("user2").get();
+        Member user3Member = memberFacade.findByUsername("user3").get();
 
         Post post1 = postService.write(user1Member, "제목1", "내용1");
         Post post2 = postService.write(user1Member, "제목2", "내용2");
@@ -74,9 +74,9 @@ public class DataInit {
         Post post5 = postService.findById(5).get();
         Post post6 = postService.findById(6).get();
 
-        Member user1Member = memberService.findByUsername("user1").get();
-        Member user2Member = memberService.findByUsername("user2").get();
-        Member user3Member = memberService.findByUsername("user3").get();
+        Member user1Member = memberFacade.findByUsername("user1").get();
+        Member user2Member = memberFacade.findByUsername("user2").get();
+        Member user3Member = memberFacade.findByUsername("user3").get();
 
         if (post1.hasComments()) return;
 
