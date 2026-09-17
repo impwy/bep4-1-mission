@@ -1,14 +1,13 @@
-package com.back.boundedContext.member.eventListenser;
+package com.back.boundedContext.member.in;
 
-import org.hibernate.event.spi.PostDeleteEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import com.back.boundedContext.member.entity.Member;
-import com.back.boundedContext.member.service.MemberService;
+import com.back.boundedContext.member.domain.Member;
+import com.back.boundedContext.member.app.MemberService;
 import com.back.shared.post.event.PostCommentCreatedEvent;
 import com.back.shared.post.event.PostCreatedEvent;
 
