@@ -16,11 +16,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
+@Table(name = "POST_POST")
 @NoArgsConstructor
 public class Post extends BaseIdAndTime {
     @ManyToOne(fetch = LAZY)
