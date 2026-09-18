@@ -1,6 +1,7 @@
 package com.back.boundedContext.cash.app;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.back.boundedContext.cash.domain.CashMember;
 import com.back.boundedContext.cash.out.CashMemberRepository;
@@ -13,14 +14,13 @@ import lombok.RequiredArgsConstructor;
 public class CashFacade {
     private final CashMemberRepository cashMemberRepository;
 
+    @Transactional
     public CashMember syncMember(MemberDto memberDto) {
         CashMember cashMember = new CashMember(memberDto.getId(), memberDto.getNickname(),
                                                memberDto.getUsername(), "",
                                                memberDto.getActivityScore(), memberDto.getCreateDate(),
                                                memberDto.getModifyDate());
 
-        CashMember cashmember = cashMemberRepository.save(cashMember);
-
-        return cashMember;
+        return cashMemberRepository.save(cashMember);
     }
 }
