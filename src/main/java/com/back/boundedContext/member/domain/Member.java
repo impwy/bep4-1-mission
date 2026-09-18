@@ -1,8 +1,7 @@
 package com.back.boundedContext.member.domain;
 
-import com.back.global.jpa.entity.BaseIdAndTime;
+import com.back.shared.member.domain.SourceMember;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,20 +9,13 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor
-public class Member extends BaseIdAndTime {
-    @Column(unique = true)
-    private String username;
-    private String password;
-    private String nickname;
-    private int activityScore;
-
+public class Member extends SourceMember {
     public Member(String username, String password, String nickname) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
+        super(username, password, nickname);
     }
 
     public int increaseActivityScore(int amount) {
-        return this.activityScore += amount;
+        setActivityScore(getActivityScore() + amount);
+        return getActivityScore();
     }
 }
