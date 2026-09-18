@@ -25,6 +25,6 @@ public abstract class ReplicaMember extends BaseMember {
         this.id = id;
         this.createDate = createDate;
         this.modifyDate = modifyDate;
-        super(nickname, username, password, activityScore);
+        super(username, nickname, password, activityScore);
     }
 }
