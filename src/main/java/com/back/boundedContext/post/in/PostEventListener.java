@@ -8,6 +8,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import com.back.boundedContext.post.app.PostFacade;
 import com.back.shared.member.event.MemberJoinedEvent;
+import com.back.shared.member.event.MemberModifiedEvent;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +20,12 @@ public class PostEventListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleEvent(MemberJoinedEvent event) {
-        postFacade.createPostMember(event.getMemberDto());
+        postFacade.syncMember(event.getMemberDto());
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void handleEvent(MemberModifiedEvent event) {
+        postFacade.syncMember(event.memberDto());
     }
 }

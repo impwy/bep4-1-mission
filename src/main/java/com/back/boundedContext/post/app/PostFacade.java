@@ -38,7 +38,7 @@ public class PostFacade {
     }
 
     @Transactional
-    public void createPostMember(MemberDto memberDto) {
+    public void syncMember(MemberDto memberDto) {
         PostMember postMember = new PostMember(
                 memberDto.getId(),
                 memberDto.getNickname(),
