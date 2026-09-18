@@ -43,6 +43,7 @@ public class PostFacade {
                 memberDto.getId(),
                 memberDto.getNickname(),
                 memberDto.getUsername(),
+                "",
                 memberDto.getActivityScore(),
                 memberDto.getCreateDate(),
                 memberDto.getModifyDate()
