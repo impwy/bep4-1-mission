@@ -21,6 +21,7 @@ public class MarketSupport {
     private final ProductRepository productRepository;
     private final MarketMemberRepository marketMemberRepository;
     private final CartRepository cartRepository;
+    private final OrderRepository orderRepository;
 
     public long countProducts() {
         return productRepository.count();
@@ -36,5 +37,9 @@ public class MarketSupport {
 
     public Optional<Cart> findCartByBuyer(MarketMember buyer) {
         return cartRepository.findByBuyer(buyer);
+    }
+
+    public long countOrders() {
+        return orderRepository.count();
     }
 }
