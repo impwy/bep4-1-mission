@@ -1,5 +1,6 @@
 package com.back.boundedContext.post.app;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -29,5 +30,13 @@ public class PostSupporter {
 
     public long count() {
         return postRepository.count();
+    }
+
+    public List<Post> findAll() {
+        return postRepository.findAll();
+    }
+
+    public List<Post> findByOrderByIdDesc() {
+        return postRepository.findByOrderByIdDesc();
     }
 }
