@@ -8,6 +8,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 
 import com.back.boundedContext.cash.app.CashFacade;
 import com.back.shared.cash.event.CashMemberCreatedEvent;
+import com.back.shared.market.event.MarketOrderPaymentRequestedEvent;
 import com.back.shared.member.event.MemberJoinedEvent;
 import com.back.shared.member.event.MemberModifiedEvent;
 
@@ -34,5 +35,11 @@ public class CashEventListener {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handle(MemberModifiedEvent event) {
         cashFacade.syncMember(event.memberDto());
+    }
+
+    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void handle(MarketOrderPaymentRequestedEvent event) {
+        cashFacade.handle(event);
     }
 }

@@ -1,4 +1,4 @@
-package com.back.boundedContext.market.app;
+package com.back.boundedContext.market.out;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
