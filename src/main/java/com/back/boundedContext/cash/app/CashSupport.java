@@ -26,4 +26,8 @@ public class CashSupport {
     public Optional<Wallet> findWalletByHolder(CashMember holder) {
         return walletRepository.findByHolder(holder);
     }
+
+    public boolean isNew(int id) {
+        return !cashMemberRepository.existsById(id);
+    }
 }
