@@ -1,6 +1,7 @@
 package com.back.boundedContext.member.app;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.back.boundedContext.member.domain.Member;
 import com.back.boundedContext.member.out.MemberRepository;
@@ -13,6 +14,7 @@ import com.back.shared.member.event.MemberJoinedEvent;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MemberJoinUseCase {
     private final MemberRepository memberRepository;
