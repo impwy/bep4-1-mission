@@ -5,8 +5,11 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.back.boundedContext.market.domain.Cart;
 import com.back.boundedContext.market.domain.MarketMember;
 import com.back.boundedContext.market.domain.Product;
+import com.back.global.rsData.RsData;
+import com.back.shared.market.dto.MarketMemberDto;
 import com.back.shared.member.dto.MemberDto;
 
 import lombok.RequiredArgsConstructor;
@@ -18,19 +21,19 @@ public class MarketFacade {
     private final MarketMemberSyncUseCase marketMemberSyncUseCase;
     private final MarketCreateProductUseCase marketCreateProductUseCase;
     private final MarketSupport marketSupport;
+    private final MarketCreateCartUseCase marketCreateCartUseCase;
 
     public void syncMember(MemberDto memberDto) {
         marketMemberSyncUseCase.syncMember(memberDto);
     }
 
-    public Product createProduct(
-            MarketMember seller,
-            String sourceTypeCode,
-            int sourceId,
-            String name,
-            String description,
-            long price,
-            long salePrice) {
+    public Product createProduct(MarketMember seller,
+                                 String sourceTypeCode,
+                                 Integer sourceId,
+                                 String name,
+                                 String description,
+                                 Long price,
+                                 Long salePrice) {
         return marketCreateProductUseCase.createProduct(seller, sourceTypeCode, sourceId, name,
                                                         description, price, salePrice);
     }
@@ -43,5 +46,17 @@ public class MarketFacade {
     @Transactional(readOnly = true)
     public Optional<MarketMember> findMemberByUsername(String username) {
         return marketSupport.findMemberByUsername(username);
+    }
+
+    public RsData<Cart> createCart(MarketMemberDto member) {
+        return marketCreateCartUseCase.createCart(member);
+    }
+
+    public Optional<Product> findProductById(int id) {
+        return marketSupport.findById(id);
+    }
+
+    public Optional<Cart> findCartByBuyer(MarketMember buyer) {
+        return marketSupport.findCartByBuyer(buyer);
     }
 }
