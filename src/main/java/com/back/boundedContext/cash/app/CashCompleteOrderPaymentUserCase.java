@@ -49,7 +49,7 @@ public class CashCompleteOrderPaymentUserCase {
         } else {
             publisher.publish(
                     new CashOrderPaymentFailedEvent("400-1",
-                                                    "충전은 완료했지만 %번 주문을 결제완료처리를 하기에는 예치금이 부족합니다."
+                                                    "충전은 완료했지만 %d번 주문을 결제완료처리를 하기에는 예치금이 부족합니다."
                                                             .formatted(event.orderDto().id()),
                                                     event.orderDto(),
                                                     event.pgPaymentAmount(),

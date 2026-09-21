@@ -37,4 +37,10 @@ public class MemberFacade {
     public String getRandomSecureTip() {
         return memberGetRandomSecureTipUseCase.getRandomSecureTip();
     }
+
+    public void incrementActivityScore(int authorId, int score) {
+        Member member = memberSupporter.findById(authorId)
+                                       .orElseThrow();
+        member.increaseActivityScore(score);
+    }
 }
