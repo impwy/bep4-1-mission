@@ -3,6 +3,7 @@ package com.back.boundedContext.payout.app;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.back.boundedContext.payout.domain.Payout;
 import com.back.shared.market.dto.OrderDto;
 import com.back.shared.member.dto.MemberDto;
 import com.back.shared.payout.dto.PayoutMemberDto;
@@ -21,8 +22,8 @@ public class PayoutFacade {
         paymentSyncMemberUseCase.syncMember(member);
     }
 
-    public void createPayout(PayoutMemberDto payee) {
-        payoutCreatePayoutUseCase.createPayOut(payee);
+    public Payout createPayout(PayoutMemberDto payee) {
+        return payoutCreatePayoutUseCase.createPayOut(payee);
     }
 
     public void addPayoutCandidateItems(OrderDto order) {
