@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.back.boundedContext.market.domain.Order;
 import com.back.boundedContext.market.out.OrderRepository;
 import com.back.shared.cash.event.CashOrderPaymentSucceededEvent;
+import com.back.shared.market.dto.OrderDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,8 +16,8 @@ import lombok.RequiredArgsConstructor;
 public class MarketCompleteOrderPaymentUseCase {
     private final OrderRepository orderRepository;
 
-    public void handle(CashOrderPaymentSucceededEvent event) {
-        Order order = orderRepository.findById(event.order().id()).orElseThrow();
+    public void completeOrderPayment(int orderId) {
+        Order order = orderRepository.findById(orderId).orElseThrow();
 
         order.completePayment();
     }

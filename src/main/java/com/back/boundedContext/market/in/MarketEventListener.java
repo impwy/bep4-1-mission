@@ -4,9 +4,7 @@ import static org.springframework.transaction.annotation.Propagation.REQUIRES_NE
 import static org.springframework.transaction.event.TransactionPhase.AFTER_COMMIT;
 
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import com.back.boundedContext.market.app.MarketFacade;
@@ -44,12 +42,12 @@ public class MarketEventListener {
     @TransactionalEventListener(phase = AFTER_COMMIT)
     @Transactional(propagation = REQUIRES_NEW)
     public void handle(CashOrderPaymentSucceededEvent event) {
-        marketFacade.handle(event);
+        marketFacade.completeOrderPayment(event.order().id());
     }
 
     @TransactionalEventListener(phase = AFTER_COMMIT)
     @Transactional(propagation = REQUIRES_NEW)
     public void handle(CashOrderPaymentFailedEvent event) {
-        marketFacade.handle(event);
+        marketFacade.cancelOrderRequestPayment(event.order().id());
     }
 }

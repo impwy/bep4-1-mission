@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.back.boundedContext.cash.domain.CashMember;
 import com.back.boundedContext.cash.domain.Wallet;
 import com.back.shared.cash.dto.CashMemberDto;
+import com.back.shared.market.dto.OrderDto;
 import com.back.shared.market.event.MarketOrderPaymentRequestedEvent;
 import com.back.shared.member.dto.MemberDto;
 
@@ -43,8 +44,8 @@ public class CashFacade {
     }
 
     @Transactional
-    public void handle(MarketOrderPaymentRequestedEvent event) {
-        cashCompleteOrderPaymentUserCase.handle(event);
+    public void completeOrderPayment(OrderDto order, long pgPaymentAmount) {
+        cashCompleteOrderPaymentUserCase.handle(order, pgPaymentAmount);
     }
 
     @Transactional(readOnly = true)
