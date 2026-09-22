@@ -1,5 +1,5 @@
 package com.back.standard.modelType;
 
-public interface HashModelTypeCode {
+public interface HasModelTypeCode {
     String getModelTypeCode();
 }

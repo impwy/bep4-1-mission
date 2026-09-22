@@ -85,6 +85,7 @@ public class ApiV1OrderController {
     }
 
     @GetMapping("/{id}/items")
+    @Transactional
     public List<OrderItemDto> getItems(@PathVariable int id) {
         return marketFacade.findOrderById(id)
                            .get()

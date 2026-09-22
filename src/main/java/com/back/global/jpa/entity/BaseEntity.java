@@ -3,7 +3,7 @@ package com.back.global.jpa.entity;
 import java.time.LocalDateTime;
 
 import com.back.global.global.GlobalConfig;
-import com.back.standard.modelType.HashModelTypeCode;
+import com.back.standard.modelType.HasModelTypeCode;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.Getter;
 @MappedSuperclass
 @Getter
 // 모든 엔티티들의 조상
-public abstract class BaseEntity implements HashModelTypeCode {
+public abstract class BaseEntity implements HasModelTypeCode {
     public abstract int getId();
 
     public abstract LocalDateTime getCreateDate();
