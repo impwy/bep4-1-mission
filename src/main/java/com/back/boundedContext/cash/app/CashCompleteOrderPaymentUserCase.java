@@ -53,7 +53,7 @@ public class CashCompleteOrderPaymentUserCase {
                                                             .formatted(event.orderDto().id()),
                                                     event.orderDto(),
                                                     event.pgPaymentAmount(),
-                                                    event.pgPaymentAmount() - customerWallet.getBalance()));
+                                                    event.orderDto().salePrice() - customerWallet.getBalance()));
         }
     }
 }
