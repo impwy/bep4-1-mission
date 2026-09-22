@@ -25,7 +25,7 @@ public class CashCompleteOrderPaymentUserCase {
             customerWallet.credit(
                     pgPaymentAmount,
                     EventType.충전__PG결제_토스페이먼츠,
-                    "Order",
+                    order.getModelTypeCode(),
                     order.id());
         }
 
@@ -35,13 +35,13 @@ public class CashCompleteOrderPaymentUserCase {
             customerWallet.debit(
                     order.salePrice(),
                     EventType.사용__주문결제,
-                    "Order",
+                    order.getModelTypeCode(),
                     order.id());
 
             holdingWallet.credit(
                     order.salePrice(),
                     EventType.임시보관__주문결제,
-                    "Order",
+                    order.getModelTypeCode(),
                     order.id());
 
             publisher.publish(new CashOrderPaymentSucceededEvent(order, pgPaymentAmount));

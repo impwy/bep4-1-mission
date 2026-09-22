@@ -2,7 +2,9 @@ package com.back.shared.market.dto;
 
 import java.time.LocalDateTime;
 
-public record OrderDto(
+import com.back.standard.modelType.HashModelTypeCode;
+
+public record OrderDto (
         int id,
         LocalDateTime createDate,
         LocalDateTime modifyDate,
@@ -11,5 +13,10 @@ public record OrderDto(
         long price,
         long salePrice,
         LocalDateTime requestPaymentDate,
-        LocalDateTime paymentDate) {
+        LocalDateTime paymentDate) implements HashModelTypeCode {
+
+    @Override
+    public String getModelTypeCode() {
+        return "Order";
+    }
 }

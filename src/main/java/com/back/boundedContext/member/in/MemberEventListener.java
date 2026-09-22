@@ -20,7 +20,7 @@ public class MemberEventListener {
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handle(PostCreatedEvent event) {
-        memberFacade.incrementActivityScore(event.getPost().getAuthorId(), 3);
+        memberFacade.incrementActivityScore(event.getPost().authorId(), 3);
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)

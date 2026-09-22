@@ -65,60 +65,60 @@ public class MarketDataInit {
 
         Product product1 = marketFacade.createProduct(
                 user1MarketMember,
-                "Post",
-                post1.getId(),
-                post1.getTitle(),
-                post1.getContent(),
+                post1.getModelTypeCode(),
+                post1.id(),
+                post1.title(),
+                post1.content(),
                 10_000L,
                 10_000L
         );
 
         Product product2 = marketFacade.createProduct(
                 user1MarketMember,
-                "Post",
-                post2.getId(),
-                post2.getTitle(),
-                post2.getContent(),
+                post2.getModelTypeCode(),
+                post2.id(),
+                post2.title(),
+                post2.content(),
                 15_000L,
                 15_000L
         );
 
         Product product3 = marketFacade.createProduct(
                 user1MarketMember,
-                "Post",
-                post3.getId(),
-                post3.getTitle(),
-                post3.getContent(),
+                post3.getModelTypeCode(),
+                post3.id(),
+                post3.title(),
+                post3.content(),
                 20_000L,
                 20_000L
         );
 
         Product product4 = marketFacade.createProduct(
                 user2MarketMember,
-                "Post",
-                post4.getId(),
-                post4.getTitle(),
-                post4.getContent(),
+                post4.getModelTypeCode(),
+                post4.id(),
+                post4.title(),
+                post4.content(),
                 25_000L,
                 25_000L
         );
 
         Product product5 = marketFacade.createProduct(
                 user2MarketMember,
-                "Post",
-                post5.getId(),
-                post5.getTitle(),
-                post5.getContent(),
+                post5.getModelTypeCode(),
+                post5.id(),
+                post5.title(),
+                post5.content(),
                 30_000L,
                 30_000L
         );
 
         Product product6 = marketFacade.createProduct(
                 user3MarketMember,
-                "Post",
-                post6.getId(),
-                post6.getTitle(),
-                post6.getContent(),
+                post6.getModelTypeCode(),
+                post6.id(),
+                post6.title(),
+                post6.content(),
                 35_000L,
                 35_000L
         );
