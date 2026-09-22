@@ -30,7 +30,7 @@ public class MarketMemberSyncUseCase {
                          memberDto.getModifyDate());
 
         if (isNew) {
-            eventPublisher.publish(new MarketMemberCreatedEvent(new MarketMemberDto(marketMember)));
+            eventPublisher.publish(new MarketMemberCreatedEvent(marketMember.toDto()));
         }
 
         return marketMemberRepository.save(marketMember);

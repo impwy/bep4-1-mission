@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.back.global.jpa.entity.BaseEntity;
 import com.back.global.jpa.entity.BaseManualIdAndTime;
+import com.back.shared.cash.dto.WalletDto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -82,5 +83,15 @@ public class Wallet extends BaseManualIdAndTime {
         cashLogs.add(cashLog);
 
         return cashLog;
+    }
+
+    public WalletDto toDto() {
+        return new WalletDto(getId(),
+                             getCreateDate(),
+                             getModifyDate(),
+                             getHolder().getId(),
+                             getHolder().getUsername(),
+                             getBalance()
+        );
     }
 }

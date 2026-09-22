@@ -11,7 +11,7 @@ import com.back.shared.cash.dto.WalletDto;
 public class CashApiClient {
     private final RestClient restClient;
 
-    public CashApiClient(@Value("${custom.global.interalBackUrl}")
+    public CashApiClient(@Value("${custom.global.internalBackUrl}")
                          String internalBackUrl) {
         this.restClient = RestClient.builder()
                                     .baseUrl(internalBackUrl + "/api/v1/cash")

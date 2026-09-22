@@ -36,11 +36,11 @@ custom:
     toss:
       payments:
         secretKey: ${TOSS_PAYMENTS_SECRET_KEY:}
+    product:
+      payoutRate: 90
   global:
-    interalBackUrl: http://localHost:${server.port:8080}
+    internalBackUrl: http://localhost:${server.port:8080}
     holdingMemberId: 2
   member:
-    pasword:
+    password:
       changeDays: 90
-  product:
-    payoutRate: 90

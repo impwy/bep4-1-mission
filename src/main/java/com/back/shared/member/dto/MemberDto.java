@@ -16,13 +16,4 @@ public class MemberDto {
     private final int activityScore;
     private final LocalDateTime createDate;
     private final LocalDateTime modifyDate;
-
-    public MemberDto(Member member) {
-        this.id = member.getId();
-        this.username = member.getUsername();
-        this.nickname = member.getNickname();
-        this.activityScore = member.getActivityScore();
-        this.createDate = member.getCreateDate();
-        this.modifyDate = member.getModifyDate();
-    }
 }

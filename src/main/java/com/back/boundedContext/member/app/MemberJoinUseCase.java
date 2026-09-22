@@ -8,7 +8,6 @@ import com.back.boundedContext.member.out.MemberRepository;
 import com.back.global.eventPublisher.EventPublisher;
 import com.back.global.exception.DomainException;
 import com.back.global.rsData.RsData;
-import com.back.shared.member.dto.MemberDto;
 import com.back.shared.member.event.MemberJoinedEvent;
 
 import lombok.RequiredArgsConstructor;
@@ -22,12 +21,12 @@ public class MemberJoinUseCase {
 
     public RsData<Member> join(String username, String password, String nickname) {
         memberRepository.findByUsername(username)
-                .ifPresent(m -> {
-                    throw new DomainException("409-1", "이미 존재하는 username입니다.");
-                });
+                        .ifPresent(m -> {
+                            throw new DomainException("409-1", "이미 존재하는 username입니다.");
+                        });
         Member member = memberRepository.save(new Member(username, password, nickname));
 
-        eventPublisher.publish(new MemberJoinedEvent(new MemberDto(member)));
+        eventPublisher.publish(new MemberJoinedEvent(member.toDto()));
 
         return new RsData<>("201-1", "%d번 회원이 생성되었습니다.".formatted(member.getId()), member);
     }

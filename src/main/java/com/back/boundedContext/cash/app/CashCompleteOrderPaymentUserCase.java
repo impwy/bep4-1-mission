@@ -17,7 +17,7 @@ public class CashCompleteOrderPaymentUserCase {
     private final CashSupport cashSupport;
     private final EventPublisher publisher;
 
-    public void handle(OrderDto order, long pgPaymentAmount) {
+    public void completeOrderPayment(OrderDto order, long pgPaymentAmount) {
         Wallet customerWallet = cashSupport.findWalletByHolderId(order.customerId()).get();
         Wallet holdingWallet = cashSupport.findHoldingWallet().get();
 

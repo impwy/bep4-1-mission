@@ -2,7 +2,6 @@ package com.back.shared.post.dto;
 
 import java.time.LocalDateTime;
 
-import com.back.boundedContext.post.domain.Post;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import lombok.AllArgsConstructor;
@@ -20,16 +19,4 @@ public class PostDto {
     private final String authorName;
     private final String title;
     private final String content;
-
-    public PostDto(Post post) {
-        this(
-                post.getId(),
-                post.getCreateDate(),
-                post.getModifyDate(),
-                post.getAuthor().getId(),
-                post.getAuthor().getNickname(),
-                post.getTitle(),
-                post.getContent()
-        );
-    }
 }

@@ -21,8 +21,13 @@ public class Member extends SourceMember {
     public int increaseActivityScore(int amount) {
         activityScore += amount;
 
-        publishEvent(new MemberModifiedEvent(new MemberDto(this)));
+        publishEvent(new MemberModifiedEvent(toDto()));
 
         return activityScore;
+    }
+
+    public MemberDto toDto() {
+        return new MemberDto(getId(), username, nickname, activityScore,
+                             getCreateDate(), getModifyDate());
     }
 }
