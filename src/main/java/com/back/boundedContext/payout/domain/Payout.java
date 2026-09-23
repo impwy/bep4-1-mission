@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.back.global.jpa.entity.BaseIdAndTime;
+import com.back.shared.payout.dto.PayoutDto;
+import com.back.shared.payout.event.PayoutCompletedEvent;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -47,5 +49,24 @@ public class Payout extends BaseIdAndTime {
         this.amount += amount;
 
         return payoutItem;
+    }
+
+    public void completePayout() {
+        payoutDate = LocalDateTime.now();
+
+        publishEvent(new PayoutCompletedEvent(toDto()));
+    }
+
+    public PayoutDto toDto() {
+        return new PayoutDto(
+                getId(),
+                getCreateDate(),
+                getModifyDate(),
+                payee.getId(),
+                payee.getNickname(),
+                payoutDate,
+                amount,
+                payee.isSystem()
+        );
     }
 }

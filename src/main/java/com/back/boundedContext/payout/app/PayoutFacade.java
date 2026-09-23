@@ -10,7 +10,6 @@ import com.back.boundedContext.payout.domain.PayoutCandidateItem;
 import com.back.global.rsData.RsData;
 import com.back.shared.market.dto.OrderDto;
 import com.back.shared.member.dto.MemberDto;
-import com.back.shared.payout.dto.PayoutMemberDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,13 +22,14 @@ public class PayoutFacade {
     private final PayoutAddPayoutCandidateItemUseCase payoutAddPayoutCandidateItemUseCase;
     private final PayoutCollectPayoutItemsMoreUseCase payoutCollectPayoutItemsMoreUseCase;
     private final PayoutSupport payoutSupport;
+    private final PayoutCompletePayoutItemsMoreUseCase payoutCompletePayoutItemsMoreUseCase;
 
     public void syncMember(MemberDto member) {
         paymentSyncMemberUseCase.syncMember(member);
     }
 
-    public Payout createPayout(PayoutMemberDto payee) {
-        return payoutCreatePayoutUseCase.createPayOut(payee);
+    public Payout createPayout(int  payeeId) {
+        return payoutCreatePayoutUseCase.createPayOut(payeeId);
     }
 
     public void addPayoutCandidateItems(OrderDto order) {
@@ -45,5 +45,9 @@ public class PayoutFacade {
     public List<PayoutCandidateItem> findPayoutCandidateItems() {
         return payoutSupport
                 .findPayoutCandidateItems();
+    }
+
+    public RsData<Integer> completePayoutsMore(int limit) {
+        return payoutCompletePayoutItemsMoreUseCase.completePayoutsMore(limit);
     }
 }
