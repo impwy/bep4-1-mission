@@ -15,20 +15,22 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Configuration
-public class PayoutCollectItemBatchJobConfig {
+public class PayoutCollectItemAndCompletePayoutBatchJobConfig {
     private static final int CHUNK_SIZE = 10;
 
     private final PayoutFacade payoutFacade;
 
-    public PayoutCollectItemBatchJobConfig(PayoutFacade payoutFacade) {
+    public PayoutCollectItemAndCompletePayoutBatchJobConfig(PayoutFacade payoutFacade) {
         this.payoutFacade = payoutFacade;
     }
 
     @Bean
-    public Job payoutCollectItemsJob(JobRepository jobRepository,
-                                     Step payoutCollectItemsStep) {
-        return new JobBuilder("payoutCollectItemsJob", jobRepository)
+    public Job payoutCollectItemsAndCompletePayoutsJob(JobRepository jobRepository,
+                                                       Step payoutCollectItemsStep,
+                                                       Step payoutCompletePayouts) {
+        return new JobBuilder("payoutCollectItemsAndCompletePayoutsJob", jobRepository)
                 .start(payoutCollectItemsStep)
+                .next(payoutCompletePayouts)
                 .build();
     }
 
@@ -41,7 +43,23 @@ public class PayoutCollectItemBatchJobConfig {
                     if (processedCount == 0) {
                         return RepeatStatus.FINISHED;
                     }
-                    contribution.incrementFilterCount(processedCount);
+                    contribution.incrementWriteCount(processedCount);
+
+                    return RepeatStatus.CONTINUABLE;
+                }))
+                .build();
+    }
+
+    @Bean
+    public Step payoutCompletePayouts(JobRepository jobRepository) {
+        return new StepBuilder("payoutCompletePayouts", jobRepository)
+                .tasklet(((contribution, chunkContext) -> {
+                    int processedCount = payoutFacade.completePayoutsMore(CHUNK_SIZE).getData();
+
+                    if (processedCount == 0) {
+                        return RepeatStatus.FINISHED;
+                    }
+                    contribution.incrementWriteCount(processedCount);
 
                     return RepeatStatus.CONTINUABLE;
                 }))
